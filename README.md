@@ -12,6 +12,9 @@ Unix-based system. For example, in debian based distributions, simply run:
 In a your Unix based terminal, run the following:
 
 `cd ~`
+
 `git clone https://github.com/lukasjenks/fileencrypter`
+
 `cd fileencrypter`
+
 `python2 encryption.py &`
