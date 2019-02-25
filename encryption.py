@@ -34,9 +34,9 @@ def e():
     log_file.write(encrypted_log_contents)
     log_file.close()
 
-    # Erase existing output message if it exists
+    # Erase existing output message and replace with new
     global output_message
-    output_message.destroy()
+    output_message.pack_forget()
     output_message = Label(output_area, text="Successfully encrypted file")
     output_message.pack()
 
@@ -52,9 +52,9 @@ def d():
     log_file.write(decrypted_log_contents)
     log_file.close()
 
-    # Erase existing output message if it exists
+    # Erase existing output message and replace with new
     global output_message
-    output_message.destroy()
+    output_message.pack_forget()
     output_message = Label(output_area, text="Successfully decrypted file")
     output_message.pack()
     
@@ -83,8 +83,8 @@ if __name__=='__main__':
     quit_button.pack()
     output_area = LabelFrame(top, width=200, height=100)
     output_area.pack()
-    output_message = Label(output_area, text="")
+    output_message = Label(output_area, text="Ready")
     output_message.pack()
-    top.geometry('300x200')
-    top.title("Lukas' Encryption Module")
+    top.geometry('400x300')
+    top.title("File Encrypter")
     top.mainloop()
