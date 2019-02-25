@@ -8,7 +8,7 @@ global sec
 sec = 'f51M4ZGQzPtdWP6zO9twyftG1hfLs50FRcJcIvwKv1Q='
 sec = bytes(sec.encode('utf-8'))
 f = Fernet(sec) #type: <cryptography.fernet.Fernet object>
-
+    
 # Encrypt plaintext string to ciphertext string
 def encrypt(thisString):
     encryptedString = f.encrypt(bytes(thisString.encode('utf-8')))
@@ -34,6 +34,12 @@ def e():
     log_file.write(encrypted_log_contents)
     log_file.close()
 
+    # Erase existing output message if it exists
+    global output_message
+    output_message.destroy()
+    output_message = Label(output_area, text="Successfully encrypted file")
+    output_message.pack()
+
 # Open log.txt, read ciphertext contents and overwrite with
 # equivalent ciphertext
 def d():
@@ -46,23 +52,39 @@ def d():
     log_file.write(decrypted_log_contents)
     log_file.close()
 
+    # Erase existing output message if it exists
+    global output_message
+    output_message.destroy()
+    output_message = Label(output_area, text="Successfully decrypted file")
+    output_message.pack()
+    
 # Tk function to close the program window
 def close_window():
     top.destroy()
 
 # Main script to initialize program window and
 # it's interactive elements and labels
-top = tkinter.Tk()
-labelframe = LabelFrame(top, width=600, height=600, text="ENCRYPTION MODULE 1.0")
-labelframe.pack()
-left = Label(labelframe, text="Use the buttons below to encrypt/decrypt log")
-left.pack()
-encrypt_button = Button(top,text="Encrypt",command=e)
-encrypt_button.pack()
-decrypt_button = Button(top,text="Decrypt",command=d)
-decrypt_button.pack()
-quit_button = Button(top,text="Quit",command=close_window)
-quit_button.pack()
-top.geometry('300x200')
-top.title("Lukas' Encryption Module")
-top.mainloop()
+
+global top
+global output_area
+global output_message
+
+if __name__=='__main__':
+    top = tkinter.Tk()
+    labelframe = LabelFrame(top, width=600, height=600, text="ENCRYPTION MODULE 1.0")
+    labelframe.pack()
+    left = Label(labelframe, text="Use the buttons below to encrypt/decrypt log")
+    left.pack()
+    encrypt_button = Button(top,text="Encrypt",command=e)
+    encrypt_button.pack()
+    decrypt_button = Button(top,text="Decrypt",command=d)
+    decrypt_button.pack()
+    quit_button = Button(top,text="Quit",command=close_window)
+    quit_button.pack()
+    output_area = LabelFrame(top, width=200, height=100)
+    output_area.pack()
+    output_message = Label(output_area, text="")
+    output_message.pack()
+    top.geometry('300x200')
+    top.title("Lukas' Encryption Module")
+    top.mainloop()
