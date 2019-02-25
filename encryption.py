@@ -1,25 +1,29 @@
+# Import necessary packages
 from cryptography.fernet import Fernet
 from tkinter import Tk, Label, LabelFrame, Button, Entry, IntVar, END, W, E, Frame
 import tkinter
-        
+
+# Initialize seed and fernet object for encryption
 global sec
 sec = 'f51M4ZGQzPtdWP6zO9twyftG1hfLs50FRcJcIvwKv1Q='
 sec = bytes(sec.encode('utf-8'))
 f = Fernet(sec) #type: <cryptography.fernet.Fernet object>
 
-#String -> String
+# Encrypt plaintext string to ciphertext string
 def encrypt(thisString):
     encryptedString = f.encrypt(bytes(thisString.encode('utf-8')))
     encryptedString = str(encryptedString).encode('utf-8')
     return encryptedString #type = <class 'string'>
 
-#String -> String
+# Decrypt ciphertext string to plaintext string
 def decrypt(encryptedString):
     encryptedBytes = bytes(encryptedString.encode('utf-8'))
     decryptedBytes = f.decrypt(encryptedBytes)
     decryptedString = str(decryptedBytes).encode('utf-8')
     return decryptedString #type = <class 'string'>
 
+# Open log.txt, read plaintext contents and overwrite with
+# equivalent ciphertext
 def e():
     log_file = open("log.txt","r")
     decrypted_log_contents = log_file.read()
@@ -29,7 +33,9 @@ def e():
     log_file = open("log.txt","w")
     log_file.write(encrypted_log_contents)
     log_file.close()
-    
+
+# Open log.txt, read ciphertext contents and overwrite with
+# equivalent ciphertext
 def d():
     log_file = open("log.txt","r")
     encrypted_log_contents = log_file.read()
@@ -40,11 +46,13 @@ def d():
     log_file.write(decrypted_log_contents)
     log_file.close()
 
+# Tk function to close the program window
 def close_window():
     top.destroy()
-    
+
+# Main script to initialize program window and
+# it's interactive elements and labels
 top = tkinter.Tk()
-#Code to add widgets will go here...
 labelframe = LabelFrame(top, width=600, height=600, text="ENCRYPTION MODULE 1.0")
 labelframe.pack()
 left = Label(labelframe, text="Use the buttons below to encrypt/decrypt log")
