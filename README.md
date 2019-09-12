@@ -9,7 +9,7 @@ Unix-based system. For example, in debian based distributions, simply run:
 `sudo apt-get install python-tkinter`
 
 ## Installation
-In a your Unix based terminal, run the following:
+In a Unix based terminal, run the following:
 
 `cd ~`
 
